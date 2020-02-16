@@ -22,10 +22,15 @@ class HomeTableTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadTweet()
+    }
 
     func loadTweet() {
        let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        let myParams = ["count": 10]
+        let myParams = ["count": 100]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             self.tweetArray.removeAll()
             for tweet in tweets {
@@ -55,6 +60,13 @@ class HomeTableTableViewController: UITableViewController {
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
+        
+        cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)
+        
+        cell.tweetId = tweetArray[indexPath.row]["id"] as! Int
+        
+        cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
+        
         return cell
     }
     
@@ -65,7 +77,7 @@ class HomeTableTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tweetArray.count
+        return self.tweetArray.count
     }
 
     /*
