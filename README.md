@@ -22,4 +22,4 @@ The following **bonus** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![](unit4gif.gif)
+![](unit4gif.gif.sb-6ee6b0b8-OCKxdr)
