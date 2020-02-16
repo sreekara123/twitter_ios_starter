@@ -30,7 +30,7 @@ class HomeTableTableViewController: UITableViewController {
 
     func loadTweet() {
        let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
-        let myParams = ["count": 100]
+        let myParams = ["count": 10]
         TwitterAPICaller.client?.getDictionariesRequest(url: myUrl, parameters: myParams, success: { (tweets: [NSDictionary]) in
             self.tweetArray.removeAll()
             for tweet in tweets {
@@ -38,7 +38,7 @@ class HomeTableTableViewController: UITableViewController {
             }
             self.tableView.reloadData()
         }, failure: { (Error) in
-            print("bye")
+            print("bye \(Error)")
         })
     }
     // MARK: - Table view data source
